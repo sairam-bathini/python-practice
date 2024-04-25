@@ -1,13 +1,13 @@
+from passlib.hash import bcrypt_sha256  # For password hashing
 import re
-import bcrypt  # For password hashing
 
 # Define the hardcoded credentials (replace with secure storage mechanism)
-hashed_password = bcrypt.hashpw(b"sairam@123", bcrypt.gensalt())
+hashed_password = bcrypt_sha256.hash("sairam@123")
 valid_username = "sairam bathini"
 
 def check_authentication(username, password):
     # Check if the username exists and the password is correct
-    if username == valid_username and bcrypt.checkpw(password.encode(), hashed_password):
+    if username == valid_username and bcrypt_sha256.verify(password, hashed_password):
         print("Logged in successfully")
     else:
         print("Login failed")
